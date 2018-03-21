@@ -33,13 +33,12 @@ class Reservas extends \yii\db\ActiveRecord
     {
         return [
             [['usuario_id', 'vuelo_id', 'asiento'], 'required'],
-            [['usuario_id', 'vuelo_id'], 'default', 'value' => null],
-            [['usuario_id', 'vuelo_id'], 'integer'],
-            [['asiento'], 'number'],
-            [['created_at'], 'safe'],
+            [['usuario_id', 'vuelo_id'], 'default', 'value' => null], // Cuando el valor sea vacío, se deb convertir en nulo
+            [['usuario_id', 'vuelo_id', 'asiento'], 'integer'],
+            [['created_at'], 'safe'], // No es necesario ya que se generará el valor automáticamente
             [['vuelo_id', 'asiento'], 'unique', 'targetAttribute' => ['vuelo_id', 'asiento']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
-            [['vuelo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vuelos::className(), 'targetAttribute' => ['vuelo_id' => 'id']],
+            [['vuelo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vuelos::className(), 'targetAttribute' => ['vuelo_id' => 'id']],// TargetAttribute se refiere a la columna a la que apunta.
         ];
     }
 
@@ -62,7 +61,7 @@ class Reservas extends \yii\db\ActiveRecord
      */
     public function getUsuario()
     {
-        return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id'])->inverseOf('reservas');
+        return $this->hasOne(Usuarios::className(), ['id' => 'usuario_id'])->inverseOf('reservas'); //HasOne devuelve 1
     }
 
     /**

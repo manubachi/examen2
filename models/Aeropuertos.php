@@ -43,16 +43,16 @@ class Aeropuertos extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'codigo' => 'Codigo',
-            'denominacion' => 'Denominacion',
+            //'id' => 'ID',
+            'codigo' => 'Código',
+            'denominacion' => 'Denominación',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVuelos()
+    public function getVuelosOrigen()
     {
         return $this->hasMany(Vuelos::className(), ['origen_id' => 'id'])->inverseOf('origen');
     }
@@ -60,7 +60,7 @@ class Aeropuertos extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getVuelos0()
+    public function getVuelosDestino()
     {
         return $this->hasMany(Vuelos::className(), ['destino_id' => 'id'])->inverseOf('destino');
     }
