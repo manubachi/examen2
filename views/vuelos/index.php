@@ -24,9 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'codigo',
-            'origen.codigo',
-            'destino.codigo',
-            'compania.denominacion',
+            'origen.codigo:text:Origen',
+            'destino.codigo:text:Destino',
+            'compania.denominacion:text:Compañia',
             'salida:datetime',
             'llegada:datetime',
             'plazas',
