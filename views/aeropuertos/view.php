@@ -9,13 +9,6 @@ use yii\widgets\DetailView;
 $this->title = $model->codigo;
 $this->params['breadcrumbs'][] = ['label' => 'Aeropuertos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-$js = <<<EOT
-$('#borrar').click(function (event) {
-    event.preventDefault();
-    alert('hola');
-});
-EOT;
-$this->registerJs($js);
 ?>
 <div class="aeropuertos-view">
 
