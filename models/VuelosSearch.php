@@ -67,7 +67,7 @@ class VuelosSearch extends Vuelos
         }
 
         $query->joinWith(['origen o', 'destino d', 'compania c'])// JoinWith es combinacion por la izquierda
-            ->addGroupBy('o.codigo, d.codigo, c.denominacion');
+        ->addGroupBy('o.codigo, d.codigo, c.denominacion');
 
         $dataProvider->sort->attributes['plazas_libres'] = [
             'asc' => ['plazas_libres' => SORT_ASC],
