@@ -31,6 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'llegada:datetime',
             'plazas',
             'precio:currency',
+            'plazas_libres',
+            // Forma de saber las plazas libres de modo rápido, se aconseja hacerlo en el modelo.
+            /*[
+                'attribute' => 'libres',
+                'value' => function ($model, $key, $index, $column) {
+                    return $model->plazas - count($model->reservas);
+                }
+            ],*/
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
