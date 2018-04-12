@@ -40,7 +40,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],*/
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{reservar}', //botones en el template entre llaves
+                'buttons' => [ // Aqui se indica lo que hace cada boton
+                    'reservar' => function ($url, $model, $key){
+                        return Html::a('Reservar',[
+                                'reservas/create',
+                                'vuelo_id' => $model->id
+                        ], ['class' =>'btn-sm btn-success']);
+                    },
+
+                ],
+            ],
         ],
     ]); ?>
 </div>

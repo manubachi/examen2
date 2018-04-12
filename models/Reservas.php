@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "reservas".
  *
@@ -36,9 +34,16 @@ class Reservas extends \yii\db\ActiveRecord
             [['usuario_id', 'vuelo_id'], 'default', 'value' => null], // Cuando el valor sea vacío, se deb convertir en nulo
             [['usuario_id', 'vuelo_id', 'asiento'], 'integer'],
             [['created_at'], 'safe'], // No es necesario ya que se generará el valor automáticamente
+            [['asiento'], function ($attribute, $params, $validator) {
+                //Esta funcion se encarga de detectar errores
+                $plazas = $this->vuelo->plazas; //Esto funciona ya que al modelo Reservas se le pasa el id del vuelo
+                if ($this->asiento < 1 || $this->asiento > $plazas) {
+                    $this->addError($attribute, "El numero de asiento debe estar comprendido entre 1 y {$this->vuelo->plazas}");
+                }
+            }],
             [['vuelo_id', 'asiento'], 'unique', 'targetAttribute' => ['vuelo_id', 'asiento']],
             [['usuario_id'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario_id' => 'id']],
-            [['vuelo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vuelos::className(), 'targetAttribute' => ['vuelo_id' => 'id']],// TargetAttribute se refiere a la columna a la que apunta.
+            [['vuelo_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vuelos::className(), 'targetAttribute' => ['vuelo_id' => 'id']], // TargetAttribute se refiere a la columna a la que apunta.
         ];
     }
 
