@@ -5,7 +5,6 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Reservas;
 
 /**
  * ReservasSearch represents the model behind the search form of `app\models\Reservas`.
@@ -34,7 +33,7 @@ class ReservasSearch extends Reservas
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
      *
      * @param array $params
      *
@@ -42,7 +41,9 @@ class ReservasSearch extends Reservas
      */
     public function search($params)
     {
-        $query = Reservas::find();
+        $query = Reservas::find()
+        ->with('vuelo')
+        ->where(['usuario_id' => Yii::$app->user->id]);
 
         // add conditions that should always apply here
 
